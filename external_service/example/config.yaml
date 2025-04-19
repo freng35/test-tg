@@ -1,0 +1,7 @@
+rest:
+  host: "[::]"
+  port: 8041
+
+tg_service:
+  host: "test-tg-grpc-service-1"
+  port: 8040

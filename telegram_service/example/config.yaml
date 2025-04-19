@@ -1,0 +1,10 @@
+grpc:
+  host: "[::]"
+  port: 8040
+
+postgres:
+  user: "postgres"
+  password: "postgres"
+  host: "test-tg-postgres-1"
+  port: "5432"
+  db: "membership"

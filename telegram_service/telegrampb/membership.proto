@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package membership;
+
+option go_package = "tg_service/telegram_service/telegrampb";
+
+service MembershipService {
+  rpc CheckMembership(CheckRequest) returns (CheckResponse);
+}
+
+message CheckRequest {
+  string bot_token = 1;
+  string channel_url = 2;
+  int64 user_id = 3;
+}
+
+message CheckResponse {
+  bool is_member = 1;
+  bool added_to_db = 2;
+}

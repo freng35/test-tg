@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: membership
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./migrations:/docker-entrypoint-initdb.d
+
+  http-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.http
+    command: app_exec external_service/example/config.yaml
+    ports:
+      - "8041:8041"
+    depends_on:
+      - postgres
+      - grpc-service
+
+  grpc-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.grpc
+    command: app_exec telegram_service/example/config.yaml
+    ports:
+      - "8040:8040"
+    depends_on:
+      - postgres
